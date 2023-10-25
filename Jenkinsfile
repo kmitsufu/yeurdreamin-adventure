@@ -23,6 +23,8 @@ node {
         checkout scm
     }
 
+    rc = sh returnStatus: true, script: "sfdx force:org:list"
+
     withCredentials([file(credentialsId: JWT_KEY_CRED_ID, variable: 'jwt_key_file')]) {
         stage('Authorize ORG') {
             if (isUnix()) {
