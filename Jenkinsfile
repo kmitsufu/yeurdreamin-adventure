@@ -87,7 +87,7 @@ node {
             println(sourcepush)
             if(isUnix()){
                 println('Checking Deployment Status');
-                statusDep = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
+                statusDep = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json -w 5"
             }else{
                 println('Checking Deployment Status');
                 statusDep = bat returnStdout: true, script: "sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
