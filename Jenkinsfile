@@ -68,7 +68,7 @@ node {
         stage('Push To Target Org') {
             if(isUnix()){
                 println(' Deploy the code into Scratch ORG.')
-                sourcepush = sh returnStdout: true, script : "sfdx force:mdapi:deploy -d ./src -u ${HUB_ORG}"
+                sourcepush = sh returnStdout: true, script : "${toolbelt}/sfdx force:mdapi:deploy -d ./src -u ${HUB_ORG}"
             }else{
                 println(' Deploy the code into Scratch ORG.')
                 sourcepush = bat returnStdout: true, script : "sfdx force:mdapi:deploy -d ./src -u ${HUB_ORG}"
@@ -87,7 +87,7 @@ node {
             println(sourcepush)
             if(isUnix()){
                 println('Checking Deployment Status');
-                statusDep = sh returnStdout: true, script: "sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
+                statusDep = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
             }else{
                 println('Checking Deployment Status');
                 statusDep = bat returnStdout: true, script: "sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
@@ -105,7 +105,7 @@ node {
             
             if(isUnix()){
                 println('Checking Deployment Status Again ');
-                statusDep1 = sh returnStdout: true, script: "sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
+                statusDep1 = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
             }else{
                 println('Checking Deployment Status Again');
                 statusDep1 = bat returnStdout: true, script: "sfdx force:mdapi:deploy:report -u ${HUB_ORG} --json"
@@ -130,7 +130,7 @@ node {
             
             if(isUnix()){
                 println(' Assign the Permission Set to the New user ')
-                permset = sh returnStdout: true, script: "sfdx force:user:permset:assign -n yeurdreamin -u ${HUB_ORG} --json"
+                permset = sh returnStdout: true, script: "${toolbelt}/sfdx force:user:permset:assign -n yeurdreamin -u ${HUB_ORG} --json"
             }else{
                 println(' Assign the Permission Set to the New user ')
                 permset = bat returnStdout: true, script: "sfdx force:user:permset:assign -n yeurdreamin -u ${HUB_ORG} --json"
@@ -144,7 +144,7 @@ node {
         stage('Import Data to test ORG') {
             if (isUnix()) {
                 println(' importing data to test org')
-                dataimport = sh returnStdout: true, script: "sfdx force:data:tree:import --plan ./data/data-plan.json -u ${HUB_ORG} --json"
+                dataimport = sh returnStdout: true, script: "${toolbelt}/sfdx force:data:tree:import --plan ./data/data-plan.json -u ${HUB_ORG} --json"
             } else {
                 println(' importing data to test org.')
                 dataimport = bat returnStdout: true, script: "sfdx force:data:tree:import --plan ./data/data-plan.json -u ${HUB_ORG} --json"
@@ -156,7 +156,7 @@ node {
         }
         stage('Run Local Test Classes') {
             if (isUnix()) {
-                testStatus = sh returnStdout: true, script: "sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG}"
+                testStatus = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG}"
             } else {
                 testStatus = bat returnStdout: true, script: "sfdx force:apex:test:run --testlevel RunLocalTests -u ${HUB_ORG} --json"
             }
@@ -164,7 +164,7 @@ node {
         }
         stage('Open Target ORG') {
             if (isUnix()) {
-                openorg = sh returnStdout: true, script: "sfdx force:org:open -u ${HUB_ORG} --json" 
+                openorg = sh returnStdout: true, script: "${toolbelt}/sfdx force:org:open -u ${HUB_ORG} --json" 
             } else {
                 openorg = bat returnStdout: true, script: "sfdx force:org:open -u ${HUB_ORG} --json"
             }
