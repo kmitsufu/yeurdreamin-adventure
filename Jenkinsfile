@@ -58,7 +58,7 @@ node {
         stage('Convert Salesforce DX and Store in SRC Folder') {
             if (isUnix()) {
                 println(' Convert SFDC Project to normal project')
-                srccode = sh returnStdout: true, script : "sf force:source:convert -r force-app -d ./src"
+                srccode = sh returnStdout: true, script : "${toolbelt}/sf force:source:convert -r force-app -d ./src"
             } else {
                 println(' Convert SFDC Project to normal project')
                 srccode = bat returnStdout: true, script : "sfdx force:source:convert -r force-app -d ./src"
