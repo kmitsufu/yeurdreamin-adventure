@@ -27,7 +27,7 @@ node {
     withCredentials([file(credentialsId: JWT_KEY_CRED_ID, variable: 'jwt_key_file')]) {
         stage('Authorize ORG') {
             if (isUnix()) {
-                rc = sh returnStatus: true, script: "${toolbelt}/sf auth:jwt:grant -i ${CONNECTED_APP_CONSUMER_KEY} -o ${HUB_ORG} --jwt-key-file ${jwt_key_file} -d -r ${SFDC_HOST}"
+                rc = sh returnStatus: true, script: "${toolbelt}/sf auth:jwt:grant -i ${CONNECTED_APP_CONSUMER_KEY} -o ${HUB_ORG} -f ${jwt_key_file} -d -r ${SFDC_HOST}"
             } else {
                 rc = bat returnStatus: true, script: "sfdx force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG} --jwtkeyfile \"${jwt_key_file}\" -d --instanceurl ${SFDC_HOST}"
             }
