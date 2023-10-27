@@ -1,6 +1,6 @@
 # yeurdreamin-adventure
 
-[![My First CI](https://github.com/amitastreait/yeurdreamin-adventure/actions/workflows/ant.yml/badge.svg)](https://github.com/amitastreait/yeurdreamin-adventure/actions/workflows/ant.yml)
+[![Java CI](https://github.com/kmitsufu/yeurdreamin-adventure/actions/workflows/ant.yml/badge.svg)](https://github.com/kmitsufu/yeurdreamin-adventure/actions/workflows/ant.yml)
 
 How to use Salesforce DX with Jenkins to implement Continuous deployment and Continuous Integration.
 # Scope: - 
